@@ -1,11 +1,10 @@
 import os
 from pymongo import MongoClient
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 
 class Connection:
     def __init__(self):
-        # Load environment variables
-        # load_dotenv()
+        load_dotenv()
 
         # Initialize connection details
         self.mongo_host = os.getenv("MONGO_HOST", "localhost")

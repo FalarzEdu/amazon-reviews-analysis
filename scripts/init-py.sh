@@ -1,5 +1,5 @@
 #!/bin/bash
-pip install pymongo pandas matplotlib jupyter
+pip install pymongo pandas matplotlib jupyter python-dotenv
 
 jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root
 
