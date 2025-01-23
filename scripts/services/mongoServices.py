@@ -37,12 +37,26 @@ class MongoServices:
             logging.error(f"Error reading from collection '{collection_name}': {e}")
             return []
 
-    def filtered_read(self, collection, filter):
+    def filtered_read(self, collection, filter, projection = None):
         try:
             collection_name = collection.name
             logging.info(f"Filtering document(s) matching filter '{filter}' in '{collection_name}'")
 
-            result = collection.find(filter)
+            result = collection.find(filter, projection)
+
+            result_list = list(result)
+            logging.info(f"Found {len(result_list)} document(s).")
+            return result_list
+        except Exception as e:
+            logging.error(f"Error finding document(s) in '{collection_name}': {e}")
+            return None
+
+    def aggregate(self, collection, pipeline):
+        try:
+            collection_name = collection.name
+            logging.info(f"Processing document(s) mathich pipeline '{pipeline}' in '{collection_name}'")
+
+            result = collection.aggregate(pipeline)
 
             result_list = list(result)
             logging.info(f"Found {len(result_list)} document(s).")

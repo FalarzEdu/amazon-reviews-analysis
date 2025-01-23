@@ -6,7 +6,6 @@ class Connection:
     def __init__(self):
         load_dotenv()
 
-        # Initialize connection details
         self.mongo_host = os.getenv("MONGO_HOST", "localhost")
         self.mongo_port = int(os.getenv("MONGO_PORT", 27017))
         self.mongo_user = os.getenv("MONGO_USER")
@@ -16,7 +15,6 @@ class Connection:
         self.db = None
 
     def connect(self):
-        """Establish connection to MongoDB."""
         try:
             self.client = MongoClient(
                 host=self.mongo_host,
@@ -33,14 +31,12 @@ class Connection:
             return None
 
     def get_collection(self, collection_name):
-        """Get a collection from the database."""
         if not self.db:
             print("No database connection found. Call connect() first.")
             return None
         return self.db[collection_name]
 
     def close(self):
-        """Close the MongoDB connection."""
         if self.client:
             self.client.close()
             print("MongoDB connection closed.")
